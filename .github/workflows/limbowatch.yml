@@ -1,0 +1,25 @@
+# Limbowatch end-to-end demo (FINDINGS F-088). Pinned to a commit until 0.1.0 is tagged.
+name: limbowatch
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+  security-events: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: limbowatch/limbowatch/integrations/action@cd1849fa28c112c525e8ff6e66c3122c8eac94f5
+        with:
+          fail-on: high
+          sarif: limbowatch.sarif
+          limbowatch-ref: cd1849fa28c112c525e8ff6e66c3122c8eac94f5
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: limbowatch, path: "limbowatch.*" }
+      - if: always()
+        continue-on-error: true   # code scanning on a private repo needs GitHub Code Security
+        uses: github/codeql-action/upload-sarif@v3
+        with: { sarif_file: limbowatch.sarif, category: limbowatch }

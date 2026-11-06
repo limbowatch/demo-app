@@ -1,0 +1,5 @@
+# Worker dependencies (pinned, except where noted)
+dnspython==2.9.1
+requests==2.34.2
+flask>=3.1                      # range only: no single version to check
+requests-oauthlib @ git+https://github.com/requests/requests-oauthlib@v2.0.0
