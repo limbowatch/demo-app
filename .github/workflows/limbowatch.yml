@@ -12,15 +12,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: limbowatch/limbowatch/integrations/action@cd1849fa28c112c525e8ff6e66c3122c8eac94f5
+      - uses: limbowatch/limbowatch/integrations/action@68c7f488c8a40c6adde5129486d3162cda585b89
+        id: limbo
         with:
           fail-on: high
           sarif: limbowatch.sarif
-          limbowatch-ref: cd1849fa28c112c525e8ff6e66c3122c8eac94f5
+          limbowatch-ref: 68c7f488c8a40c6adde5129486d3162cda585b89
       - if: always()
         uses: actions/upload-artifact@v4
-        with: { name: limbowatch, path: "limbowatch.*" }
+        with: { name: limbowatch-report, path: limbowatch-report/ }
       - if: always()
         continue-on-error: true   # code scanning on a private repo needs GitHub Code Security
         uses: github/codeql-action/upload-sarif@v4
         with: { sarif_file: limbowatch.sarif, category: limbowatch }
+      - if: always()
+        env:
+          FINDINGS: ${{ steps.limbo.outputs.findings }}
+          FAILING: ${{ steps.limbo.outputs.failing }}
+          FAILED: ${{ steps.limbo.outputs.failed }}
+        run: echo "outputs - findings=$FINDINGS failing=$FAILING failed=$FAILED"
