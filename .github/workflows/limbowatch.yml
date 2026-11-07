@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: limbowatch/limbowatch/integrations/action@68c7f488c8a40c6adde5129486d3162cda585b89
+      - uses: limbowatch/limbowatch/integrations/action@c6d16d3243cdd1346e66d64de0cb168a6d58ce9d
         id: limbo
         with:
           fail-on: high
           sarif: limbowatch.sarif
-          limbowatch-ref: 68c7f488c8a40c6adde5129486d3162cda585b89
+          limbowatch-ref: c6d16d3243cdd1346e66d64de0cb168a6d58ce9d
       - if: always()
         uses: actions/upload-artifact@v4
         with: { name: limbowatch-report, path: limbowatch-report/ }
