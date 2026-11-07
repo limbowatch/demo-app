@@ -1,4 +1,4 @@
-# Worker dependencies (pinned, except where noted)
+# Worker dependencies (pinned, except where noted). Demo only.
 dnspython==2.9.1
 requests==2.34.2
 flask>=3.1                      # range only: no single version to check
