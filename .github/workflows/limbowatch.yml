@@ -1,4 +1,4 @@
-# Limbowatch end-to-end demo (FINDINGS F-088). Pinned to a commit until 0.1.0 is tagged.
+# Limbowatch end-to-end demo (FINDINGS F-088), on the 0.1.0a1 release.
 name: limbowatch
 on:
   push:
@@ -12,12 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: limbowatch/limbowatch/integrations/action@c6d16d3243cdd1346e66d64de0cb168a6d58ce9d
+      - uses: limbowatch/limbowatch/integrations/action@v0.1.0a1
         id: limbo
         with:
           fail-on: high
           sarif: limbowatch.sarif
-          limbowatch-ref: c6d16d3243cdd1346e66d64de0cb168a6d58ce9d
       - if: always()
         uses: actions/upload-artifact@v4
         with: { name: limbowatch-report, path: limbowatch-report/ }
