@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: limbowatch/limbowatch-action@v0.1.0a5
+      - uses: limbowatch/limbowatch-action@v0.1.0a13
         id: limbo
         with:
           fail-on: high
